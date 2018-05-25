@@ -6,7 +6,13 @@
 </head>
 <body>
 <div id="myVue">
-
+    <Comp/>
+</div>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <div class="red" style="height: 300px;width: 300px;overflow: scroll">
+    <p ng-repeat="item in messageList">{{item}}</p>
+        <input type="button" value="click" ng-click="push('dfsdfsdf')">
+    </div>
 </div>
 </body>
 </html>

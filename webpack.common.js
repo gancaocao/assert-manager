@@ -1,7 +1,7 @@
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { VueLoaderPlugin } = require('vue-loader');
+const {VueLoaderPlugin} = require('vue-loader');
 module.exports = {
     entry: {
         app: "./src/index.js"
@@ -11,6 +11,7 @@ module.exports = {
         path: path.resolve(__dirname + "/dist")
     },
     resolve: {
+        extensions: [".vue", ".js", "css", "scss"],
         alias: {
             'vue$': 'vue/dist/vue.esm.js'
         }
@@ -37,8 +38,12 @@ module.exports = {
                 ]
             },
             {
-                test:/\.(png|svg|jpg|gif)$/,
-                use:[
+                test: /\.(sass|scss)$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
                     "file-loader"
                 ]
             }

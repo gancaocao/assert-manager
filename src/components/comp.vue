@@ -1,26 +1,39 @@
 <template>
-    <div class="test" style="height: 300px;width: 300px;overflow: scroll">
-        <p class="sss" v-for="item in messageList">
-            {{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}{{item}}</p>
+    <div>
+        <button @click="createComp">create</button>
+        <button @click="destroyComp">destroy</button>
+        <div id="ccc"></div>
     </div>
 
 </template>
 
 <script>
-    import getData from "../controller/getData"
+    import Vue from "vue"
+    import test from "./test"
 
     export default {
         name: "comp",
         data() {
             return {
                 message: "hello vue",
-                messageList: []
+                messageList: [],
+                pp: [],
+                p2: []
             };
         },
         mounted() {
-            console.log(getData);
-            for (let i = 0; i < 1; i++) {
-                this.messageList.push("dfsdfsdf");
+        },
+        methods: {
+            createComp() {
+                let ctor = Vue.extend(test);
+                this.instance = new ctor();
+                this.instance.$mount("#ccc");
+            },
+            destroyComp() {
+                this.instance.$destroy();
+                this.instance = null;
+                let ele = document.getElementById("ccc")
+                ele.parentElement.removeChild(ele);
             }
         }
     }
@@ -28,6 +41,7 @@
 
 <style lang="scss" scoped>
     @import "../style/test";
+
     .red {
         background-color: red;
         color: aqua;
